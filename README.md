@@ -1,4 +1,4 @@
-# AI Projekti
+# Best AI Terminal
 
 Curated collection of the best AI terminal and CLI coding videos on YouTube (February 2026).
 
@@ -20,7 +20,7 @@ Curated collection of the best AI terminal and CLI coding videos on YouTube (Feb
 
 ```bash
 # Clone and open locally
-git clone https://github.com/cyberpointlab/ai-projekti.git
+git clone https://github.com/cyberpointlab/best-ai-terminal.git
 open best-ai-terminal-videos.html
 ```
 
