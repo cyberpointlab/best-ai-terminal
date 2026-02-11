@@ -5,16 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Best AI Terminal Videos on YouTube</title>
   <style>
+    /* Dark theme (default) */
     :root {
-      --bg: #0f0f0f;
-      --surface: #1a1a2e;
-      --surface2: #16213e;
-      --accent: #e94560;
-      --accent2: #0f3460;
-      --text: #eee;
-      --text-muted: #aaa;
-      --link: #53a8f5;
-      --border: #2a2a4a;
+      --bg: #0a0f1a;
+      --surface: #111c2e;
+      --surface2: #152238;
+      --accent: #00c896;
+      --accent-hover: #00e6ad;
+      --accent2: #1a6fb5;
+      --text: #e8edf4;
+      --text-heading: #ffffff;
+      --text-muted: #8a9bb5;
+      --link: #4db8ff;
+      --border: #1e3048;
+      --hover-bg: rgba(0, 200, 150, 0.08);
+      --toggle-bg: #152238;
+      --toggle-border: #2a4060;
+    }
+    /* Light theme */
+    [data-theme="light"] {
+      --bg: #f0f5fa;
+      --surface: #ffffff;
+      --surface2: #e6eef7;
+      --accent: #009e78;
+      --accent-hover: #00b88a;
+      --accent2: #1a6fb5;
+      --text: #1a2a3a;
+      --text-heading: #0d1b2a;
+      --text-muted: #5a7088;
+      --link: #1a6fb5;
+      --border: #d0dbe8;
+      --hover-bg: rgba(0, 158, 120, 0.06);
+      --toggle-bg: #ffffff;
+      --toggle-border: #c0d0e0;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -23,13 +46,33 @@
       color: var(--text);
       line-height: 1.6;
       padding: 2rem;
+      transition: background 0.3s, color 0.3s;
     }
     .container { max-width: 1100px; margin: 0 auto; }
+    .theme-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: var(--toggle-bg);
+      border: 1px solid var(--toggle-border);
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: all 0.3s;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .theme-toggle:hover { border-color: var(--accent); }
+    .theme-icon { font-size: 1.1rem; }
     h1 {
       font-size: 2.4rem;
       text-align: center;
       margin-bottom: 0.3rem;
-      background: linear-gradient(135deg, var(--accent), #ff6b6b, #ffa502);
+      background: linear-gradient(135deg, var(--accent), #4db8ff, var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -44,7 +87,7 @@
       margin: 2.5rem 0 1rem;
       padding-bottom: 0.4rem;
       border-bottom: 2px solid var(--accent);
-      color: #fff;
+      color: var(--text-heading);
     }
     section { margin-bottom: 2rem; }
     table {
@@ -54,6 +97,7 @@
       background: var(--surface);
       border-radius: 8px;
       overflow: hidden;
+      transition: background 0.3s;
     }
     th {
       background: var(--accent2);
@@ -63,21 +107,21 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--text-muted);
+      color: #e0eaff;
     }
     td {
       padding: 0.7rem 1rem;
       border-bottom: 1px solid var(--border);
     }
     tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(233, 69, 96, 0.07); }
+    tr:hover td { background: var(--hover-bg); }
     .video-title { font-weight: 600; }
     a {
       color: var(--link);
       text-decoration: none;
       transition: color 0.2s;
     }
-    a:hover { color: #7ec8f5; text-decoration: underline; }
+    a:hover { color: var(--accent); text-decoration: underline; }
     .watch-btn {
       display: inline-block;
       background: var(--accent);
@@ -88,7 +132,7 @@
       font-weight: 600;
       transition: background 0.2s;
     }
-    .watch-btn:hover { background: #ff6b6b; text-decoration: none; color: #fff; }
+    .watch-btn:hover { background: var(--accent-hover); text-decoration: none; color: #fff; }
     .picks-list {
       list-style: none;
       display: grid;
@@ -101,8 +145,9 @@
       padding: 1rem 1.2rem;
       border-radius: 8px;
       border-left: 4px solid var(--accent);
+      transition: background 0.3s;
     }
-    .picks-list strong { color: #fff; }
+    .picks-list strong { color: var(--text-heading); }
     .channels-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -114,10 +159,10 @@
       padding: 1rem 1.2rem;
       border-radius: 8px;
       border: 1px solid var(--border);
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.3s;
     }
     .channel-card:hover { border-color: var(--accent); }
-    .channel-card h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+    .channel-card h3 { font-size: 1.05rem; margin-bottom: 0.3rem; color: var(--text-heading); }
     .channel-card .focus { color: var(--link); font-size: 0.9rem; }
     .channel-card .notes { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.3rem; }
     .tools-list {
@@ -130,8 +175,9 @@
       border-radius: 6px;
       margin-bottom: 0.5rem;
       border-left: 3px solid var(--accent2);
+      transition: background 0.3s;
     }
-    .tools-list .tool-name { font-weight: 700; color: var(--link); }
+    .tools-list .tool-name { font-weight: 700; color: var(--accent); }
     .tools-list .tool-org { color: var(--text-muted); font-size: 0.9rem; }
     .sources {
       margin-top: 1rem;
@@ -152,6 +198,11 @@
   </style>
 </head>
 <body>
+<button class="theme-toggle" onclick="toggleTheme()">
+  <span class="theme-icon" id="themeIcon">&#9790;</span>
+  <span id="themeLabel">Light</span>
+</button>
+
 <div class="container">
 
   <h1>Best AI Terminal Videos on YouTube</h1>
@@ -427,5 +478,32 @@
   </footer>
 
 </div>
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const icon = document.getElementById('themeIcon');
+    const label = document.getElementById('themeLabel');
+    if (html.getAttribute('data-theme') === 'light') {
+      html.removeAttribute('data-theme');
+      icon.innerHTML = '&#9790;';
+      label.textContent = 'Light';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      html.setAttribute('data-theme', 'light');
+      icon.innerHTML = '&#9728;';
+      label.textContent = 'Dark';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+  (function() {
+    var saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      document.getElementById('themeIcon').innerHTML = '&#9728;';
+      document.getElementById('themeLabel').textContent = 'Dark';
+    }
+  })();
+</script>
 </body>
 </html>
